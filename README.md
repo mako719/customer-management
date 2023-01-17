@@ -16,8 +16,8 @@
 
 # URL設計
 
-![BC1333EB-BEA5-4319-A43A-B087E4513AC0_4_5005_c](<img width="607" alt="D9074391-110A-4CB2-9755-6FA893C49CF8" src="https://user-images.githubusercontent.com/118739580/212885936-83acf920-e18d-4fb0-ae3d-bd4e6ed63cef.png">
+![BC1333EB-BEA5-4319-A43A-B087E4513AC0_4_5005_c](https://user-images.githubusercontent.com/118739580/212886461-a20966f3-514b-4b48-8462-36ed96904313.jpeg)
 
 # データベース定義
 
-https://user-images.githubusercontent.com/118739580/212883376-f2920b26-b1b7-4a3b-a92d-6620bd769e5d.jpeg)
+<img width="607" alt="D9074391-110A-4CB2-9755-6FA893C49CF8" src="https://user-images.githubusercontent.com/118739580/212886500-992979e6-6ac9-4712-beba-add8380c2340.png">
