@@ -23,10 +23,6 @@ public class CustomerServiceImpl implements CustomerService{
         return customerMapper.findAll();
     }
 
-    @Override
-    public Customer findById(int id){
-        return this.customerMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
-    }
 
     @Override
     public void createCustomer(CreateForm form){

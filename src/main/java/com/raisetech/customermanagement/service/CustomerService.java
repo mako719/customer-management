@@ -8,7 +8,5 @@ import java.util.List;
 public interface CustomerService {
     List<Customer> findAll();
 
-    Customer findById(int id) throws Exception;
-
     void createCustomer(CreateForm form);
 }

@@ -15,9 +15,6 @@ public interface CustomerMapper {
     @Select("SELECT * FROM customers")
     List<Customer> findAll();
 
-    @Select("SELECT * FROM names WHERE id = #{id}")
-    Optional<Customer> findById(int id);
-
     @Insert("INSERT INTO customers (id, name, age, site, staff) VALUES (#{id}, #{name}, #{age}, #{site}, #{staff})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createCustomer(CreateForm form);

@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 import java.util.Map;
 
 @RestControllerAdvice
-public class ExceptionHandler {
+public class CustomExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleNoResourceFound(
