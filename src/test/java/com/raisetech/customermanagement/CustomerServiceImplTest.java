@@ -35,7 +35,7 @@ public class CustomerServiceImplTest {
     }
 
     @Test
-    public void 顧客を1件登録できること() {
+    public void 顧客情報を1件登録できること() {
         doNothing().when(customerMapper).createCustomer(any(CreateForm.class));
         customerServiceImpl.createCustomer(any(CreateForm.class));
         verify(customerMapper).createCustomer(any(CreateForm.class));
