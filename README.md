@@ -20,4 +20,4 @@
 
 # データベース定義
 
-<img width="607" alt="D9074391-110A-4CB2-9755-6FA893C49CF8" src="https://user-images.githubusercontent.com/118739580/212886500-992979e6-6ac9-4712-beba-add8380c2340.png">
+<img width="601" alt="D37BD278-75B4-4D5F-A210-D1B07268A1D1" src="https://user-images.githubusercontent.com/118739580/213157550-74b6f7cd-3f1d-41fe-9ced-dfee82e396ff.png">
