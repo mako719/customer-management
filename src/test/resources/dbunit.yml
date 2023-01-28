@@ -1,0 +1,9 @@
+cacheConnection: false
+cacheTableNames: false
+properties:
+  schema:customer_list
+caseInsensitiveStrategy: LOWERCASE
+connectionConfig:
+  url: "jdbc:mysql://localhost:8080/customer_list"
+  users: "user"
+  password: "password"
