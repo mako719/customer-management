@@ -1,8 +1,10 @@
 package com.raisetech.customermanagement.mapper;
 
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import com.raisetech.customermanagement.entity.Customer;
+import com.raisetech.customermanagement.form.CreateForm;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +34,19 @@ class CustomerMapperTest {
                         new Customer(1, "tanaka", 35, "shoulder", "yamada"),
                         new Customer(2, "suzuki", 28, "neck", "yamamoto")
                 );
+    }
+
+    @Test
+    @ExpectedDataSet(value = "datasets/expectedCustomers.yml",ignoreCols = "id",orderBy = "id")
+    @Transactional
+    public void 顧客情報を登録できること() {
+        CreateForm c = new CreateForm();
+        c.setName("tanaka");
+        c.setAge(35);
+        c.setSite("shoulder");
+        c.setStaff("yamada");
+        customerMapper.createCustomer(c);
+        List<Customer> create = customerMapper.findAll();
+        assertThat(create).hasSize(1);
     }
 }

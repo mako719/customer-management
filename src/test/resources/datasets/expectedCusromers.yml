@@ -1,0 +1,6 @@
+customers:
+  - "id": 1
+    "name": "tanaka"
+    "age": 35
+    "site": "shoulder"
+    "staff": "yamada"
