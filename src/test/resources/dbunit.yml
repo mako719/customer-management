@@ -1,9 +1,10 @@
 cacheConnection: false
 cacheTableNames: false
 properties:
-  schema:customer_list
+  schema: customer_list
 caseInsensitiveStrategy: LOWERCASE
 connectionConfig:
-  url: "jdbc:mysql://localhost:8080/customer_list"
-  users: "user"
+  url: "jdbc:mysql://localhost:3307/customer_list"
+  user: "user"
   password: "password"
+
