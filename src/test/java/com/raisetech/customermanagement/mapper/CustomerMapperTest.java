@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @DBRider
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -41,12 +42,12 @@ class CustomerMapperTest {
     @Transactional
     public void 顧客情報を登録できること() {
         CreateForm c = new CreateForm();
-        c.setName("tanaka");
-        c.setAge(35);
+        c.setName("takahashi");
+        c.setAge(55);
         c.setSite("shoulder");
         c.setStaff("yamada");
         customerMapper.createCustomer(c);
-        List<Customer> create = customerMapper.findAll();
-        assertThat(create).hasSize(1);
+        List<Customer> customer = customerMapper.findAll();
+        assertThat(customer).hasSize(3);
     }
 }
