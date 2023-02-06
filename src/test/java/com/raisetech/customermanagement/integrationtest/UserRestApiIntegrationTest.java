@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -65,11 +67,11 @@ public class UserRestApiIntegrationTest {
                                 "   }")
                 )
                 .andExpect(MockMvcResultMatchers.status().isCreated())
-                //              .andExpect(header().string("Location", "http://localhost/name/52"))
+//                .andExpect(header().string("Location", "http://localhost/name/3"))
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
 /**        JSONAssert.assertEquals( "{" +
- "       \"id\": \"52\"," +
+ "       \"id\": \"3\"," +
  "       \"message\": \"顧客情報が登録されました。\"" +
  "   }"
  ,
