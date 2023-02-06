@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.parser.Entity;
 import java.nio.charset.StandardCharsets;
 
 @SpringBootTest
@@ -51,7 +50,7 @@ public class UserRestApiIntegrationTest {
     @Test
     @Transactional
     void 顧客情報の登録成功し201レスポンスとLocationヘッダに登録したidとレスポンスとしてメッセージが返ること() throws Exception {
-         String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
+        String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("[" + "{" +
                                 "       \"name\": \"takahashi\"," +
