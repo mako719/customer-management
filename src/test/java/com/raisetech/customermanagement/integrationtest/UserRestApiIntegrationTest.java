@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.parser.Entity;
 import java.nio.charset.StandardCharsets;
 
 @SpringBootTest
@@ -29,44 +30,46 @@ public class UserRestApiIntegrationTest {
         String response = mockMvc.perform(MockMvcRequestBuilders.get("/customers"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        JSONAssert.assertEquals(
+        JSONAssert.assertEquals("[" +
                 "   {" +
-                        "       \"id\": 1," +
-                        "       \"name\": \"tanaka\"," +
-                        "       \"age\": 35," +
-                        "       \"site\": \"shoulder\"," +
-                        "       \"staff\": yamada" +
-                        "   }," +
-                        "   {" +
-                        "       \"id\": 2," +
-                        "       \"name\": \"suzuki\"," +
-                        "       \"age\": 28," +
-                        "       \"site\": \"neck\"," +
-                        "       \"staff\": yamamoto" +
-                        "   }" +
-                        "]", response, JSONCompareMode.STRICT);
+                "       \"id\": 1," +
+                "       \"name\": \"tanaka\"," +
+                "       \"age\": 35," +
+                "       \"site\": \"shoulder\"," +
+                "       \"staff\": \"yamada\"" +
+                "   }," +
+                "   {" +
+                "       \"id\": 2," +
+                "       \"name\": \"suzuki\"," +
+                "       \"age\": 28," +
+                "       \"site\": \"neck\"," +
+                "       \"staff\": \"yamamoto\"" +
+                "   }" +
+                "]", response, JSONCompareMode.STRICT);
     }
 
     @Test
     @Transactional
     void 顧客情報の登録成功し201レスポンスとLocationヘッダに登録したidとレスポンスとしてメッセージが返ること() throws Exception {
-        String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
+         String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{" +
-                                "       \"id\": 1," +
-                                "       \"name\": \"tanaka\"," +
-                                "       \"age\": 35," +
+                        .content("[" + "{" +
+                                "       \"name\": \"takahashi\"," +
+                                "       \"age\": 55," +
                                 "       \"site\": \"shoulder\"," +
-                                "       \"staff\": yamada" +
-                                "   }")
+                                "       \"staff\": \"yamada\"" +
+                                "   }" +
+                                "]")
                 )
                 .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.header().string("Location", "http://localhost/customers/1"))
+                .andExpect(MockMvcResultMatchers.header().string("Location", "http://localhost:8080/customers/names/3"))
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        JSONAssert.assertEquals("{" +
-                "       \"message\": \"顧客情報が登録されました。\"," +
-                "       \"id\": 1," +
-                "   }", response, JSONCompareMode.STRICT);
+        JSONAssert.assertEquals("[" + "{" +
+                        "       \"id\": \"3\"," +
+                        "       \"message\": \"顧客情報が登録されました。\"" +
+                        "   }" +
+                        "]",
+                response, JSONCompareMode.STRICT);
     }
 }
