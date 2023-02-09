@@ -86,7 +86,6 @@ public class UserRestApiIntegrationTest {
     @DataSet(value = "customers.yml")
     @Transactional
     void 顧客情報登録時空白がある場合エラーメッセージを返すこと() throws Exception {
-        String time = ZonedDateTime.now().toString();
         String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{" +
