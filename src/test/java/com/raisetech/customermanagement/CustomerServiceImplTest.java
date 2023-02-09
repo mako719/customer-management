@@ -32,6 +32,7 @@ public class CustomerServiceImplTest {
 
         List<Customer> actual = customerServiceImpl.findAll();
         assertThat(actual).isEqualTo(customerList);
+        verify(customerMapper, times(1)).findAll();
     }
 
     @Test

@@ -38,7 +38,8 @@ class CustomerMapperTest {
     }
 
     @Test
-    @ExpectedDataSet(value = "datasets/expectedCustomers.yml",ignoreCols = "id",orderBy = "id")
+    @DataSet(value = "datasets/customers.yml")
+    @ExpectedDataSet(value = "datasets/expectedcustomers.yml",ignoreCols = "id",orderBy = "id")
     @Transactional
     public void 顧客情報を登録できること() {
         CreateForm c = new CreateForm();
