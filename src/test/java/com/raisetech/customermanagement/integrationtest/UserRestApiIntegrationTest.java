@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
+import java.time.ZonedDateTime;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
@@ -85,6 +86,7 @@ public class UserRestApiIntegrationTest {
     @DataSet(value = "customers.yml")
     @Transactional
     void 顧客情報登録時空白がある場合エラーメッセージを返すこと() throws Exception {
+        String time = ZonedDateTime.now().toString();
         String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{" +
@@ -97,7 +99,7 @@ public class UserRestApiIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
         JSONAssert.assertEquals("{" +
-                        "       \"timestamp\": ZonedDateTime.now().toString()," +
+                        "       \"timestamp\":" +
                         "       \"status\": 400" +
                         "       \"error\": \"Bad Request\"," +
                         "       \"path\": \"/customers\""+
