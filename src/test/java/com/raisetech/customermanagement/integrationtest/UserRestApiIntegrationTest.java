@@ -75,7 +75,7 @@ public class UserRestApiIntegrationTest {
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
         JSONAssert.assertEquals("{" +
-                        "               \"id\": \"3\"," +
+                        "       \"id\": \"3\"," +
                         "       \"message\": \"顧客情報が登録されました。\"" +
                         "   }"
                 ,
@@ -88,13 +88,13 @@ public class UserRestApiIntegrationTest {
     void 顧客情報登録時空白がある場合エラーメッセージを返すこと() throws Exception {
         String time = ZonedDateTime.now().toString();
         String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{" +
-                        "       \"name\": \"\"," +
-                        "       \"age\": 55," +
-                        "       \"site\": \"shoulder\"," +
-                        "       \"staff\": \"yamada\"" +
-                        "   }")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{" +
+                                "       \"name\": \"\"," +
+                                "       \"age\": 55," +
+                                "       \"site\": \"shoulder\"," +
+                                "       \"staff\": \"yamada\"" +
+                                "   }")
                 )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
@@ -102,8 +102,8 @@ public class UserRestApiIntegrationTest {
                         "       \"timestamp\":" +
                         "       \"status\": 400" +
                         "       \"error\": \"Bad Request\"," +
-                        "       \"path\": \"/customers\""+
-                "   }"
+                        "       \"path\": \"/customers\"" +
+                        "   }"
                 ,
                 response, JSONCompareMode.STRICT);
     }
