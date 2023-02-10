@@ -4,6 +4,8 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -28,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UserRestApiIntegrationTest {
 
+    ZonedDateTime zonedDateTime = ZonedDateTime.of(2023, 1, 1, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
     @Autowired
     MockMvc mockMvc;
 
@@ -86,25 +90,27 @@ public class UserRestApiIntegrationTest {
     @DataSet(value = "customers.yml")
     @Transactional
     void 顧客情報登録時空白がある場合エラーメッセージを返すこと() throws Exception {
-        String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{" +
-                                "       \"name\": \"\"," +
-                                "       \"age\": 55," +
-                                "       \"site\": \"shoulder\"," +
-                                "       \"staff\": \"yamada\"" +
-                                "   }")
-                )
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        JSONAssert.assertEquals("{" +
-                        "       \"timestamp\":" +
-                        "       \"status\": 400" +
-                        "       \"error\": \"Bad Request\"," +
-                        "       \"path\": \"/customers\"" +
-                        "   }"
-                ,
-                response, JSONCompareMode.STRICT);
-    }
+        try(MockedStatic<ZonedDateTime> zonedDateTimeMockedStatic = Mockito.mockStatic(ZonedDateTime.class)) {
+            zonedDateTimeMockedStatic.when(ZonedDateTime::now).thenReturn(zonedDateTime);
 
+            String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{" +
+                                    "       \"name\": \"\"," +
+                                    "       \"age\": 55," +
+                                    "       \"site\": \"shoulder\"," +
+                                    "       \"staff\": \"yamada\"" +
+                                    "}")
+                    )
+                    .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                    .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+            String expected = "{" +
+                            "       \"timestamp\": \"2023-01-01T00:00+09:00[Asia/Tokyo]\"," +
+                            "       \"status\": \"400\"," +
+                            "       \"error\": \"Bad Request\"," +
+                            "       \"path\": \"/customers\"" +
+                            "}";
+            JSONAssert.assertEquals(expected, response, JSONCompareMode.STRICT);
+        }
+    }
 }
