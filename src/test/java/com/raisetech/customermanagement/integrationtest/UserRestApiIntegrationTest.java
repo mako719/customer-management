@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UserRestApiIntegrationTest {
 
-    ZonedDateTime zonedDateTime = ZonedDateTime.of(2023, 1, 1, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
+    ZonedDateTime zonedDateTime = ZonedDateTime.of(2023, 2, 13, 15,57,5,930,ZoneId.of("Asia/Tokyo"));
     @Autowired
     MockMvc mockMvc;
 
@@ -90,7 +90,7 @@ public class UserRestApiIntegrationTest {
     @DataSet(value = "customers.yml")
     @Transactional
     void 顧客情報登録時空白がある場合エラーメッセージを返すこと() throws Exception {
-        try(MockedStatic<ZonedDateTime> zonedDateTimeMockedStatic = Mockito.mockStatic(ZonedDateTime.class)) {
+        try (MockedStatic<ZonedDateTime> zonedDateTimeMockedStatic = Mockito.mockStatic(ZonedDateTime.class)) {
             zonedDateTimeMockedStatic.when(ZonedDateTime::now).thenReturn(zonedDateTime);
 
             String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
@@ -100,17 +100,21 @@ public class UserRestApiIntegrationTest {
                                     "       \"age\": 55," +
                                     "       \"site\": \"shoulder\"," +
                                     "       \"staff\": \"yamada\"" +
-                                    "}")
+                                    "}"
+                            )
                     )
                     .andExpect(MockMvcResultMatchers.status().isBadRequest())
                     .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
             String expected = "{" +
-                            "       \"timestamp\": \"2023-01-01T00:00+09:00[Asia/Tokyo]\"," +
-                            "       \"status\": \"400\"," +
-                            "       \"error\": \"Bad Request\"," +
-                            "       \"path\": \"/customers\"" +
-                            "}";
+                    "       \"timestamp\":\"2023-02-13T05:57:15.930+00:00[Asia/Tokyo]\"," +
+                    "       \"status\":\"400\"," +
+                    "       \"error\":\"Bad Request\"," +
+                    "       \"path\":\"/customers\"" +
+                    "}";
             JSONAssert.assertEquals(expected, response, JSONCompareMode.STRICT);
         }
     }
+    //JSONの文法確認
+    //JSONが配列になっていないこと
+    //
 }
