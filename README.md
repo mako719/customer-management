@@ -21,3 +21,30 @@
 # データベース定義
 
 <img width="601" alt="D37BD278-75B4-4D5F-A210-D1B07268A1D1" src="https://user-images.githubusercontent.com/118739580/213157550-74b6f7cd-3f1d-41fe-9ced-dfee82e396ff.png">
+
+# Spring Boot設定
+
+Spring Bootの設定にはspring initializrを使用して設定しました。
+
+| Project| Gradle Project| 
+| :---: | :---: | 
+| Language | Java | 
+| Spring Boot | 3.0.0 | 
+| packing | Jar | 
+| Java | 17 | 
+
+# PC環境
+
+OS macOS 13.1（22C65）
+
+CPU Apple M1
+
+# 開発環境
+
+IntelliJ IDEA
+
+ランタイムバージョン: 17.0.4.1+7-b469.62 aarch64
+
+# 実行環境
+
+JavaSE-17
