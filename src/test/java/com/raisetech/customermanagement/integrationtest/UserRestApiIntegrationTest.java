@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UserRestApiIntegrationTest {
 
-    ZonedDateTime zonedDateTime = ZonedDateTime.of(2023, 2, 13, 15,57,5,930,ZoneId.of("Asia/Tokyo"));
+    ZonedDateTime zonedDateTime = ZonedDateTime.of(2023, 2, 13, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
     @Autowired
     MockMvc mockMvc;
 
@@ -106,7 +106,7 @@ public class UserRestApiIntegrationTest {
                     .andExpect(MockMvcResultMatchers.status().isBadRequest())
                     .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
             String expected = "{" +
-                    "       \"timestamp\":\"2023-02-13T05:57:15.930+00:00[Asia/Tokyo]\"," +
+                    "       \"timestamp\":\"2023-02-13T00:00+09:00[Asia/Tokyo]\"," +
                     "       \"status\":\"400\"," +
                     "       \"error\":\"Bad Request\"," +
                     "       \"path\":\"/customers\"" +
@@ -114,7 +114,4 @@ public class UserRestApiIntegrationTest {
             JSONAssert.assertEquals(expected, response, JSONCompareMode.STRICT);
         }
     }
-    //JSONの文法確認
-    //JSONが配列になっていないこと
-    //
 }
