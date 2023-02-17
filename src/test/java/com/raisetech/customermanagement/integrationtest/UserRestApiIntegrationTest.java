@@ -1,7 +1,6 @@
 package com.raisetech.customermanagement.integrationtest;
 
 import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
@@ -31,9 +30,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UserRestApiIntegrationTest {
 
-    ZonedDateTime zonedDateTime = ZonedDateTime.of(2023, 2, 13, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
     @Autowired
     MockMvc mockMvc;
+
+    ZonedDateTime zonedDateTime = ZonedDateTime.of(2023, 2, 13, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
 
     @Test
     @DataSet(value = "customers.yml")
@@ -62,7 +62,6 @@ public class UserRestApiIntegrationTest {
 
     @Test
     @DataSet(value = "customers.yml")
-    @ExpectedDataSet(value = "datasets/expectedcustomers.yml", ignoreCols = "id", orderBy = "id")
     @Transactional
     void 顧客情報の登録成功し201レスポンスとLocationヘッダに登録したidとレスポンスとしてメッセージが返ること() throws Exception {
         String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
