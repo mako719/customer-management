@@ -29,3 +29,20 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task dockerComposeUp (type: Exec) {
+	commandLine 'docker-compose','-f','src/test/resources/testdata/test-docker-compose.yml','up','-d'
+	doLast {
+		Thread.sleep(5 * 1000)
+	}
+}
+
+task dockerComposeDown (type: Exec) {
+	commandLine 'docker-compose', '-f', 'src/test/resources/testdata/test-docker-compose.yml', 'down', '--remove-orphans', '--volumes'
+}
+
+test {
+	useJUnitPlatform()
+	dependsOn(dockerComposeUp)
+	finalizedBy(dockerComposeDown)
+}
