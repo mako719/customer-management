@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  test:
+  db:
     build: .
     container_name: test_customers
     platform: linux/x86_64

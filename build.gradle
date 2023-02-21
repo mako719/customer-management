@@ -1,7 +1,7 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.0.1'
-	id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+    id 'org.springframework.boot' version '3.0.1'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'com.raisetech'
@@ -9,40 +9,40 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
-	compileOnly 'org.projectlombok:lombok:1.18.24'
-	annotationProcessor 'org.projectlombok:lombok:1.18.24'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.1'
-	testImplementation 'com.github.database-rider:rider-spring:1.35.0'
-	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '3.12.4'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.1'
+    testImplementation 'com.github.database-rider:rider-spring:1.35.0'
+    testImplementation group: 'org.mockito', name: 'mockito-inline', version: '3.12.4'
 
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
-task dockerComposeUp (type: Exec) {
-	commandLine 'docker-compose','-f','src/test/resources/testdata/test-docker-compose.yml','up','-d'
-	doLast {
-		Thread.sleep(5 * 1000)
-	}
+task dockerComposeUp(type: Exec) {
+    commandLine 'docker-compose', '-f', 'src/test/resources/testdata/test-docker-compose.yml', 'up', '-d'
+    doLast {
+        Thread.sleep(5 * 1000)
+    }
 }
 
-task dockerComposeDown (type: Exec) {
-	commandLine 'docker-compose', '-f', 'src/test/resources/testdata/test-docker-compose.yml', 'down', '--remove-orphans', '--volumes'
+task dockerComposeDown(type: Exec) {
+    commandLine 'docker-compose', '-f', 'src/test/resources/testdata/test-docker-compose.yml', 'down', '--remove-orphans', '--volumes'
 }
 
 test {
-	useJUnitPlatform()
-	dependsOn(dockerComposeUp)
-	finalizedBy(dockerComposeDown)
+    useJUnitPlatform()
+    dependsOn(dockerComposeUp)
+    finalizedBy(dockerComposeDown)
 }

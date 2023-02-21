@@ -18,4 +18,3 @@ services:
       - my-vol:/var/lib/mysql
 volumes:
   my-vol:
-
