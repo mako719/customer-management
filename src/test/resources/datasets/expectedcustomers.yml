@@ -1,0 +1,16 @@
+customers:
+  - "id": 1
+    "name": "tanaka"
+    "age": 35
+    "site": "shoulder"
+    "staff": "yamada"
+  - "id": 2
+    "name": "suzuki"
+    "age": 28
+    "site": "neck"
+    "staff": "yamamoto"
+  - "id": 3
+    "name": "takahashi"
+    "age": 55
+    "site": "shoulder"
+    "staff": "yamada"

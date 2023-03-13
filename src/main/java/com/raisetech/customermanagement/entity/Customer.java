@@ -1,10 +1,10 @@
 package com.raisetech.customermanagement.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Customer {
 
     private int id;
