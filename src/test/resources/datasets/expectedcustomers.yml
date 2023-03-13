@@ -1,4 +1,4 @@
-test_customers:
+customers:
   - "id": 1
     "name": "tanaka"
     "age": 35
